@@ -1,0 +1,9 @@
+__pycache__/
+*.tar.gz
+*.npz
+cifar-10-batches-py/
+
+.vscode
+.vscode/
+.idea
+.idea/
