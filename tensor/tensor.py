@@ -3,16 +3,10 @@ from typing import Any
 
 import numpy as np
 
-__all__ = [
-    'Tensor',
-    'Matmul',
-    'Add',
-    'Subtract'
-]
+__all__ = ["Tensor", "Matmul", "Add", "Subtract"]
 
 
 class Tensor(abc.ABC):
-
     def __init__(self):
         self.output = None
         self.grad = None
@@ -60,7 +54,6 @@ class Tensor(abc.ABC):
 
 
 class Matmul(Tensor):
-
     def __init__(self, tensor1: Tensor, tensor2: Tensor):
         super().__init__()
         self.tensor1 = tensor1
@@ -87,7 +80,6 @@ class Matmul(Tensor):
 
 
 class Add(Tensor):
-
     def __init__(self, tensor1: Tensor, tensor2: Tensor):
         super().__init__()
         self.tensor1 = tensor1
@@ -114,7 +106,6 @@ class Add(Tensor):
 
 
 class Subtract(Tensor):
-
     def __init__(self, tensor1: Tensor, tensor2: Tensor):
         super().__init__()
         self.tensor1 = tensor1
