@@ -156,6 +156,21 @@ class Power(Tensor):
         super().backward(grad)
 
 
+class Exp(Tensor):
+
+    def __init__(self, tensor: Tensor, base: float = None):
+        super().__init__()
+        self.tensor = tensor
+        self.factor = np.log(base) if base is not None else 1
+
+    def forward(self) -> np.ndarray:
+        return np.power(self.base, self.tensor())
+
+    def backward(self, grad: np.ndarray) -> None:
+        self.tensor.backward(grad * np.power(self.base, self.tensor.output) * self.factor)
+        super().backward(grad)
+
+
 class Relu(Tensor):
 
     def __init__(self, tensor: Tensor):
