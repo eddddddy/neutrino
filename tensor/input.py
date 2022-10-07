@@ -4,7 +4,6 @@ from tensor import Tensor
 
 
 class Input(Tensor):
-
     def __init__(self):
         super().__init__()
         self.data = None

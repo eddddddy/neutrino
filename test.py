@@ -10,7 +10,6 @@ from utils import load_mnist, load_cifar
 
 
 class MnistModel:
-
     def __call__(self, input_tensor: Tensor) -> Tensor:
         x = ops.reshape(input_tensor, (-1, 28, 28, 1))
         x = Conv2D(1, 16, kernel_size=3, padding=1)(x)
@@ -27,7 +26,6 @@ class MnistModel:
 
 
 class CifarModel:
-
     def __call__(self, input_tensor: Tensor) -> Tensor:
         x = Conv2D(3, 24, kernel_size=3, padding=1)(input_tensor)
         x = ops.relu(x)
@@ -62,4 +60,6 @@ model.compile(Adam(lr=1e-3), CrossEntropyLoss())
 model.train(x_train, y_train, batch_size=16, epochs=10)
 preds = model.predict(x_test, batch_size=16)
 
-print(f"Accuracy: {np.count_nonzero(np.argmax(preds, axis=1) == np.argmax(y_test, axis=1)) / x_test.shape[0]}")
+print(
+    f"Accuracy: {np.count_nonzero(np.argmax(preds, axis=1) == np.argmax(y_test, axis=1)) / x_test.shape[0]}"
+)

@@ -6,7 +6,6 @@ import ops
 
 
 class Dense(Layer):
-
     def __init__(self, in_units: int, out_units: int, use_bias: bool = True):
         super().__init__()
 

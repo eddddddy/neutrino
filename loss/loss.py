@@ -6,11 +6,7 @@ import numpy as np
 from tensor import Tensor, Variable
 import ops
 
-__all__ = [
-    'Loss',
-    'MSELoss',
-    'CrossEntropyLoss'
-]
+__all__ = ["Loss", "MSELoss", "CrossEntropyLoss"]
 
 
 class LossTensor:
@@ -26,7 +22,6 @@ class LossTensor:
 
 
 class Loss(abc.ABC):
-
     def __call__(self, pred: Tensor, true: Union[np.ndarray, Tensor]):
         if not isinstance(true, Tensor):
             true = Variable(true)
@@ -41,14 +36,12 @@ class Loss(abc.ABC):
 
 
 class MSELoss(Loss):
-
     def compute_loss(self, pred: Tensor, true: Tensor) -> Tensor:
         return ops.mean(ops.sum(ops.power(ops.subtract(pred, true), 2), axis=1), axis=0)
 
 
 class CrossEntropyLoss(Loss):
     class SoftmaxCrossEntropyWithLogits(Tensor):
-
         def __init__(self, pred: Tensor, true: Tensor):
             super().__init__()
             self.pred = pred
@@ -61,7 +54,7 @@ class CrossEntropyLoss(Loss):
             probs = probs / np.sum(probs, axis=1, keepdims=True)
             self.probs = probs
 
-            return -np.einsum('ij,ij->i', self.true(), np.log(probs))
+            return -np.einsum("ij,ij->i", self.true(), np.log(probs))
 
         def backward(self, grad: np.ndarray) -> None:
             self.pred.backward(grad.reshape(-1, 1) * (self.probs - self.true.output))

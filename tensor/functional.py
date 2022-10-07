@@ -4,20 +4,10 @@ import numpy as np
 
 from tensor import Tensor
 
-__all__ = [
-    'Reshape',
-    'Pad',
-    'Multiply',
-    'Sum',
-    'Mean',
-    'Power',
-    'Relu',
-    'Sigmoid'
-]
+__all__ = ["Reshape", "Pad", "Multiply", "Sum", "Mean", "Power", "Relu", "Sigmoid"]
 
 
 class Reshape(Tensor):
-
     def __init__(self, tensor: Tensor, new_shape: Tuple[int, ...]):
         super().__init__()
         self.tensor = tensor
@@ -35,7 +25,6 @@ class Reshape(Tensor):
 
 
 class Tile(Tensor):
-
     def __init__(self, tensor: Tensor, repeats: Tuple[int, ...]):
         super().__init__()
         self.tensor = tensor
@@ -49,7 +38,6 @@ class Tile(Tensor):
 
 
 class Pad(Tensor):
-
     def __init__(self, tensor: Tensor, padding: Tuple[Tuple[int, int], ...]):
         super().__init__()
         self.tensor = tensor
@@ -62,13 +50,17 @@ class Pad(Tensor):
         return np.pad(self.tensor.output, self.padding)
 
     def backward(self, grad: np.ndarray) -> None:
-        unpad = tuple([slice(self.padding[i][0], self.padding[i][0] + self.input_shape[i]) for i in range(len(self.input_shape))])
+        unpad = tuple(
+            [
+                slice(self.padding[i][0], self.padding[i][0] + self.input_shape[i])
+                for i in range(len(self.input_shape))
+            ]
+        )
         self.tensor.backward(grad[unpad])
         super().backward(grad)
 
 
 class Multiply(Tensor):
-
     def __init__(self, tensor: Tensor, multiplicand: float):
         super().__init__()
         self.tensor = tensor
@@ -83,7 +75,6 @@ class Multiply(Tensor):
 
 
 class Sum(Tensor):
-
     def __init__(self, tensor: Tensor, axis: Union[None, int, Tuple[int]] = None):
         super().__init__()
         self.tensor = tensor
@@ -105,14 +96,20 @@ class Sum(Tensor):
         else:
             axis = self.axis
 
-        grad_reshape = grad.reshape([1 if dim in axis else self.input_shape[dim] for dim in range(input_dim)])
-        self.tensor.backward(np.tile(grad_reshape, [1 if dim not in axis else self.input_shape[dim] for dim in range(input_dim)]))
+        grad_reshape = grad.reshape(
+            [1 if dim in axis else self.input_shape[dim] for dim in range(input_dim)]
+        )
+        self.tensor.backward(
+            np.tile(
+                grad_reshape,
+                [1 if dim not in axis else self.input_shape[dim] for dim in range(input_dim)],
+            )
+        )
 
         super().backward(grad)
 
 
 class Mean(Tensor):
-
     def __init__(self, tensor: Tensor, axis: Union[None, int, Tuple[int]] = None):
         super().__init__()
         self.tensor = tensor
@@ -134,7 +131,9 @@ class Mean(Tensor):
         else:
             axis = self.axis
 
-        grad_reshape = grad.reshape([1 if dim in axis else self.input_shape[dim] for dim in range(input_dim)])
+        grad_reshape = grad.reshape(
+            [1 if dim in axis else self.input_shape[dim] for dim in range(input_dim)]
+        )
         repeats = [1 if dim not in axis else self.input_shape[dim] for dim in range(input_dim)]
         self.tensor.backward(np.tile(grad_reshape, repeats) / np.product(repeats))
 
@@ -142,7 +141,6 @@ class Mean(Tensor):
 
 
 class Power(Tensor):
-
     def __init__(self, tensor: Tensor, exponent: float):
         super().__init__()
         self.tensor = tensor
@@ -157,7 +155,6 @@ class Power(Tensor):
 
 
 class Exp(Tensor):
-
     def __init__(self, tensor: Tensor, base: float = None):
         super().__init__()
         self.tensor = tensor
@@ -172,7 +169,6 @@ class Exp(Tensor):
 
 
 class Relu(Tensor):
-
     def __init__(self, tensor: Tensor):
         super().__init__()
         self.tensor = tensor
@@ -190,7 +186,6 @@ class Relu(Tensor):
 
 
 class Sigmoid(Tensor):
-
     def __init__(self, tensor: Tensor):
         super().__init__()
         self.tensor = tensor

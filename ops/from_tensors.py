@@ -1,22 +1,37 @@
-from tensor import Reshape, Pad, Matmul, Add, Subtract, Multiply, Sum, Mean, \
-    Power, Relu, Sigmoid, Convolve1D, Convolve2D, MaxPool1D, MaxPool2D
+from tensor import (
+    Reshape,
+    Pad,
+    Matmul,
+    Add,
+    Subtract,
+    Multiply,
+    Sum,
+    Mean,
+    Power,
+    Relu,
+    Sigmoid,
+    Convolve1D,
+    Convolve2D,
+    MaxPool1D,
+    MaxPool2D,
+)
 
 __all__ = [
-    'reshape',
-    'pad',
-    'matmul',
-    'add',
-    'subtract',
-    'multiply',
-    'sum',
-    'mean',
-    'power',
-    'relu',
-    'sigmoid',
-    'convolve1d',
-    'convolve2d',
-    'maxpool1d',
-    'maxpool2d'
+    "reshape",
+    "pad",
+    "matmul",
+    "add",
+    "subtract",
+    "multiply",
+    "sum",
+    "mean",
+    "power",
+    "relu",
+    "sigmoid",
+    "convolve1d",
+    "convolve2d",
+    "maxpool1d",
+    "maxpool2d",
 ]
 
 reshape = Reshape

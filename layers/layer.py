@@ -5,7 +5,6 @@ from tensor import Tensor, Variable
 
 
 class Layer(abc.ABC):
-
     def __init__(self):
         self.parameters = []
 

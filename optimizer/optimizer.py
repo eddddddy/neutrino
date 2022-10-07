@@ -5,15 +5,10 @@ import numpy as np
 
 from tensor import Variable
 
-__all__ = [
-    'Optimizer',
-    'SGD',
-    'Adam'
-]
+__all__ = ["Optimizer", "SGD", "Adam"]
 
 
 class Optimizer(abc.ABC):
-
     def __init__(self):
         self.parameters = []
 
@@ -26,7 +21,6 @@ class Optimizer(abc.ABC):
 
 
 class SGD(Optimizer):
-
     def __init__(self, lr: float):
         super().__init__()
         self.lr = lr
@@ -37,7 +31,6 @@ class SGD(Optimizer):
 
 
 class Adam(Optimizer):
-
     def __init__(self, lr: float, beta1: float = 0.9, beta2: float = 0.999, eps: float = 1e-8):
         super().__init__()
         self.lr = lr
@@ -57,7 +50,9 @@ class Adam(Optimizer):
     def step(self) -> None:
         for i, param in enumerate(self.parameters):
             self.means[i] = self.beta1 * self.means[i] + (1 - self.beta1) * param.grad
-            self.variances[i] = self.beta2 * self.variances[i] + (1 - self.beta2) * np.power(param.grad, 2)
+            self.variances[i] = self.beta2 * self.variances[i] + (1 - self.beta2) * np.power(
+                param.grad, 2
+            )
             mean = self.means[i] / (1 - np.power(self.beta1, self.t))
             variance = self.variances[i] / (1 - np.power(self.beta2, self.t))
             param.data = param.data - self.lr * mean / (np.sqrt(variance) + self.eps)
