@@ -1,7 +1,7 @@
 import abc
 from typing import Iterable
 
-from tensor import Tensor, Variable
+from neutrino.tensor import Tensor, Variable
 
 
 class Layer(abc.ABC):

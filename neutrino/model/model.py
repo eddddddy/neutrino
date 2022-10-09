@@ -3,9 +3,9 @@ from typing import List, Tuple
 from tqdm import tqdm
 import numpy as np
 
-from tensor import Tensor, Variable, Input
-from loss import Loss
-from optimizer import Optimizer
+from neutrino.tensor import Tensor, Variable, Input
+from neutrino.loss import Loss
+from neutrino.optimizer import Optimizer
 
 
 class Model:

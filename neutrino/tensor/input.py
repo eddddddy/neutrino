@@ -1,6 +1,6 @@
 import numpy as np
 
-from tensor import Tensor
+from neutrino.tensor import Tensor
 
 
 class Input(Tensor):
