@@ -3,8 +3,8 @@ from typing import Union
 
 import numpy as np
 
-from tensor import Tensor, Variable
-import ops
+from neutrino.tensor import Tensor, Variable
+import neutrino.ops
 
 __all__ = ["Loss", "MSELoss", "CrossEntropyLoss"]
 

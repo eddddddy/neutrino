@@ -1,8 +1,8 @@
 import numpy as np
 
-from tensor import Tensor, Variable
-from layers import Layer
-import ops
+from neutrino.tensor import Tensor, Variable
+from neutrino.layers import Layer
+import neutrino.ops
 
 
 class Dense(Layer):

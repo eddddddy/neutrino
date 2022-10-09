@@ -3,7 +3,7 @@ from typing import Iterable
 
 import numpy as np
 
-from tensor import Variable
+from neutrino.tensor import Variable
 
 __all__ = ["Optimizer", "SGD", "Adam"]
 

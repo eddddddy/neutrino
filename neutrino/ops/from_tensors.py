@@ -1,4 +1,4 @@
-from tensor import (
+from neutrino.tensor import (
     Reshape,
     Pad,
     Matmul,

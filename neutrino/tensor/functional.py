@@ -2,7 +2,7 @@ from typing import Union, Tuple
 
 import numpy as np
 
-from tensor import Tensor
+from neutrino.tensor import Tensor
 
 __all__ = ["Reshape", "Pad", "Multiply", "Sum", "Mean", "Power", "Relu", "Sigmoid"]
 

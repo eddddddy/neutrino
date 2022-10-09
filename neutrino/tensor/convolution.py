@@ -3,7 +3,7 @@ from typing import Union, Tuple
 import numpy as np
 from numpy.lib.stride_tricks import as_strided
 
-from tensor import Tensor
+from neutrino.tensor import Tensor
 
 __all__ = ["Convolve1D", "Convolve2D", "MaxPool1D", "MaxPool2D"]
 
