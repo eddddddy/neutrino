@@ -5,7 +5,6 @@ import neutrino
 
 
 class TestAdd:
-
     def test_forward(self):
         a = neutrino.Variable(np.arange(6).reshape(2, 3))
         b = neutrino.Variable(np.arange(6, 12).reshape(2, 3))
