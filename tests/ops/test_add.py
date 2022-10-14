@@ -1,4 +1,5 @@
 import pytest
+
 import numpy as np
 
 import neutrino
@@ -6,16 +7,16 @@ import neutrino
 
 class TestAdd:
     def test_forward(self):
-        a = neutrino.Variable(np.arange(6).reshape(2, 3))
-        b = neutrino.Variable(np.arange(6, 12).reshape(2, 3))
+        a = neutrino.Variable(np.array([[0, 1, 2], [3, 4, 5]]))
+        b = neutrino.Variable(np.array([[6, 7, 8], [9, 10, 11]]))
         s = neutrino.Add(a, b)
 
         res = s()
-        assert np.all(res == np.arange(6, 18, 2).reshape(2, 3))
+        assert np.all(res == np.array([[6, 8, 10], [12, 14, 16]]))
 
     def test_backward(self):
-        a = neutrino.Variable(np.arange(6).reshape(2, 3))
-        b = neutrino.Variable(np.arange(6, 12).reshape(2, 3))
+        a = neutrino.Variable(np.array([[0, 1, 2], [3, 4, 5]]))
+        b = neutrino.Variable(np.array([[6, 7, 8], [9, 10, 11]]))
         s = neutrino.Add(a, b)
 
         s()
